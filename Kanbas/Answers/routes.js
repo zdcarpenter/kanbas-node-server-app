@@ -25,7 +25,7 @@ export default function AnswerRoutes(app) {
         const status = await answersDao.updateAnswer(quizId, userId, updateAnswer);
         res.send(status);
     });
-    app.put("/api/quizzes/:quizId/user/:userId/answers/finished", async (req, res) => {
+    app.post("/api/quizzes/:quizId/user/:userId/answers", async (req, res) => {
         const { quizId, userId } = req.params;
         const status = await answersDao.addAttempt(quizId, userId);
         res.send(status);
@@ -42,7 +42,7 @@ export default function AnswerRoutes(app) {
         res.json(answers);
     });
 
-    app.post("/api/quizzes/:quizId/user/:userId/answers", async (req, res) => {
+    app.get("/api/quizzes/:quizId/user/:userId/attempt", async (req, res) => {
         const { quizId, userId } = req.params;
         const status = await answersDao.newAttempt(quizId, userId);
         res.send(status);
